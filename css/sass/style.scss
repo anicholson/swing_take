@@ -1,0 +1,20 @@
+@import 'bourbon/bourbon';
+
+/*$blue: #050f66;*/
+$main: black;
+
+$main-lighter: lighten($main, 20%);
+$background: lighten($main, 65%);
+
+dt, th {
+  color: $main;
+  font-weight: bold;
+}
+
+footer {
+	color: $main-lighter;
+}
+
+body {
+	@include linear-gradient(bottom, $main-lighter, $background);
+}
