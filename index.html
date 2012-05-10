@@ -19,13 +19,54 @@
 </head>
 <body>
 <header>
-
+<h1>SwingTake</h1>
+<h2>Because the only figures you want are dancing ones&hellip;</h2>
 </header>
 <div role="main">
-
+<section id='start'>
+	<label for='start_amount'>Starting Float $</label><input name='start_amount' type='text'/>	
+</section>
+<section id='attendance'>
+	<table>
+		<thead>
+			<tr>
+				<th>Name? (Optional)</th>
+				<th colspan='3'>Classes/Social<br/><em>L1/L2/S</em></th>
+				<th>Paid How</th>
+				<th>L/F?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type='text' name='name001'/></td>
+				<td><input type='checkbox' name='l1_001'/></td>
+				<td><input type='checkbox' name='l2_001'/></td>
+				<td><input type='checkbox' name='soc_001'/></td>
+				<td><select name='paid_001'><option value='cash'>$</option><option value='prepaid'>Prepaid</option><option value='free'>Guest</option></select>
+				<td><select name='lf_001'><option value='l'>Lead</option><option value='f'>Follow</option></select></td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+<section id='running_sheet'>
+	<dl>
+		<dt>Cash Revenue</dt><dd>$ Placeholder</dd>
+		<dt>Prepaid Revenue</dt><dd>$ Placeholder</dd>
+		<dt>Gross Revenue</dt><dd>$ Placeholder</dd>
+	</dl>
+	<dl>
+		<dt>Rental Payment</dt><dd>$ Placeholder</dd>
+		<dt>Door Payment</dt><dd>$ Placeholder</dd>
+		<dt>Net Revenue</dt><dd>$ Placeholder</dd>
+	</dl>
+	<dl>
+		<dt>SP Cut</dt><dd>$ Placeholder</dd>
+		<dt>Teachers' Payment</dt><dd>$ Placeholder</dd>
+	</dl>
+</section>
 </div>
 <footer>
-
+&copy; 2012 Andy Nicholson. All Rights Reserved
 </footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
