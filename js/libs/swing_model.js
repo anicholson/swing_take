@@ -1,7 +1,11 @@
 function calculate_cash_takings(inputs) {
-	var class_costs = [6.0, 15.0, 22.0, 29.0];
+	var class_costs = [6.0, 15.0, 22.0, 30.0];
 
 	var attendance = inputs.students;
+
+	if(!attendance) {
+		return 0.0;
+	}
 
 	return $.map(attendance, function(student, i){
 		if(student.payment_method == 'cash') {
@@ -18,6 +22,9 @@ function calculate_prepaid_revenue(inputs) {
 	var class_costs = [0.0, 13.0, 19.0, 26.0];
 
 	var attendance = inputs.students;
+	if(!attendance) {
+		return 0.0;
+	}
 
 	return $.map(attendance, function(student, i) {
 		if(student.payment_method == 'prepaid') {
@@ -31,6 +38,13 @@ function calculate_prepaid_revenue(inputs) {
 function calculate_rent_payment(inputs) {
 	var rent = inputs.rent;
 	var attendance = inputs.attendance;
+	if(!attendance && inputs.students) {
+		attendance = inputs.students.length;
+	}
+
+	if(!attendance) {
+		attendance = 0;
+	}
 
 	if (rent.strategy == 'fixed') {
 		return rent.amount;
@@ -40,7 +54,11 @@ function calculate_rent_payment(inputs) {
 }
 
 function calculate_door_payment(inputs) {
-	return inputs.door_amount;
+	if(inputs.door_amount){
+		return inputs.door_amount;
+	} else {
+		return 0.0;
+	}
 }
 
 function calculate_host_payment(net_revenue, pp_revenue) {
