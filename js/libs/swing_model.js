@@ -1,3 +1,19 @@
+function calculate_attendance(inputs) {
+	if(!inputs) {
+		return 0;
+	} else if(!inputs.students){
+		return 0;
+	} else {
+		try {
+			var a = inputs.students.length;
+			return a;
+		} catch(e) {
+			console.log("Students info garbled or incorrect: ", inputs.students);
+			return 0;
+		}
+	}
+}
+
 function calculate_cash_takings(inputs) {
 	var class_costs = [6.0, 15.0, 22.0, 30.0];
 
@@ -37,19 +53,15 @@ function calculate_prepaid_revenue(inputs) {
 
 function calculate_rent_payment(inputs) {
 	var rent = inputs.rent;
-	var attendance = inputs.attendance;
-	if(!attendance && inputs.students) {
-		attendance = inputs.students.length;
-	}
+	var attendance = calculate_attendance(inputs);
 
-	if(!attendance) {
-		attendance = 0;
-	}
-
-	if (rent.strategy == 'fixed') {
+	//default to fixed rental strategy if not specified
+  if (!rent.strategy) {
 		return rent.amount;
-	} else {
+  } else if (rent.strategy == 'prorata') {
 		return (rent.amount * attendance);
+	} else {
+		return rent.amount;
 	}
 }
 
@@ -62,27 +74,40 @@ function calculate_door_payment(inputs) {
 }
 
 function calculate_host_payment(net_revenue, pp_revenue) {
-	return (net_revenue / 2.0) - pp_revenue;
+	return Math.floor((net_revenue / 2.0)) - pp_revenue;
 }
 
-function calculate_teacher_payment(inputs, net_revenue) {
+function calculate_teacher_payment(inputs, start) {
 	var teacher_info = inputs.teachers;
 
+  //assume 50-50 if not spelt out
+  if(!teacher_info) {
+		teacher_info = {};
+	}
+
+  if(!teacher_info.strategy) {
+		teacher_info.strategy = 'normal';
+  }
+
 	if(teacher_info.strategy == 'cadet') {
+		var t1 = Math.floor(start * 0.7);
+		var t2 = start - t1;
 		return [{
 			name: teacher_info.teacher_1,
-			pay: (net_revenue / 2) * 0.7
+			pay: t1
 		}, {
 			name: teacher_info.teacher_2,
-			pay: (net_revenue / 2) * 0.3
+			pay: t2
 		}];
 	} else {
+		var t1 = Math.floor(start / 2.0);
+		var t2 = start - t1;
 		return [{
 			name: teacher_info.teacher_1,
-			pay: (net_revenue / 4)
+			pay: t1
 		}, {
 			name: teacher_info.teacher_2,
-			pay: (net_revenue / 4)
+			pay: t2
 		}];
 	}
 }
@@ -97,10 +122,14 @@ function money_model(input_data) {
 	    door         = calculate_door_payment(input_data),
 	    net_revenue  = gross_revenue - (rent + door);
 
-	var host_payment = calculate_host_payment(net_revenue, pp_revenue),
-	    teachers_pay = calculate_teacher_payment(input_data, net_revenue);
+	var host_payment = calculate_host_payment(net_revenue, pp_revenue);
+	var teachers_pay = calculate_teacher_payment(input_data, (net_revenue - host_payment - pp_revenue));
 
 	return {
+		cash_takings: cash_revenue,
+		prepaid_takings: pp_revenue,
+		net_revenue: net_revenue,
+		attendance: calculate_attendance(input_data),
 		rent: rent,
 		door: door,
 		host: host_payment,

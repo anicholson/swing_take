@@ -122,7 +122,8 @@ describe("swing patrol's take", function() {
 describe("teachers' take", function() {
 
 	it("should equal 50% of net revenue", function(){
-		teachers = calculate_teacher_payment(cash, 100.00);
+		var net_revenue = 100.00;
+		teachers = calculate_teacher_payment(cash, net_revenue / 2.0);
 		expect(teachers[0].pay + teachers[1].pay).toEqual(50.00);
 	});
 
@@ -132,7 +133,7 @@ describe("teachers' take", function() {
 	});
 
 	it("should be a 70/30 split in a cadet scenario", function() {
-		teachers = calculate_teacher_payment(cadet, 100.00);
+		teachers = calculate_teacher_payment(cadet, 50.00);
 		expect(teachers[0].pay + teachers[1].pay).toEqual(50.00);
 		expect(teachers[0].pay).toBeGreaterThan(teachers[1].pay);
 	});
