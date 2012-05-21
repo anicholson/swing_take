@@ -24,15 +24,20 @@ footer {
 }
 
 #main {
-	width: 90%;
+	width: 70%;
 	margin: 10px;
+	@include columns(2); 
+	@include column-fill(balanced);
+	@include column-gap(50px);
+	@include column-rule(1px dotted $main-lighter);
 }
 
 
 section {
 	border: 1px dashed $main-lighter;
 	background: $section;
-	
+	margin-bottom: 20px;
+	padding: 10px;
 	dl {
 		margin-left: 20px;
 	}
@@ -40,6 +45,11 @@ section {
 	dd {
 		color: $main;
 	}
+}
+
+#attendance {
+	-webkit-column-break-after: always;
+	-moz-column-break-after: always;
 }
 
 .left {
