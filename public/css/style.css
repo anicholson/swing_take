@@ -1,7 +1,48 @@
 /*$blue: #050f66;*/
-dt, th {
-  color: black;
+/* line 10, ../../sass/style.scss */
+dt, th, label {
+  color: #333333;
   font-weight: bold; }
 
+/* line 15, ../../sass/style.scss */
+header {
+  background-color: #333333;
+  color: #f2f2f2;
+  margin: 0;
+  padding: 0; }
+
+/* line 22, ../../sass/style.scss */
 footer {
-  color: #333333; }
+  color: #666666; }
+
+/* line 26, ../../sass/style.scss */
+#main {
+  width: 90%;
+  margin: 10px; }
+
+/* line 32, ../../sass/style.scss */
+section {
+  border: 1px dashed #666666;
+  background: #bfbfbf; }
+  /* line 36, ../../sass/style.scss */
+  section dl {
+    margin-left: 20px; }
+  /* line 40, ../../sass/style.scss */
+  section dd {
+    color: #333333; }
+
+/* line 45, ../../sass/style.scss */
+.left {
+  float: left;
+  width: 500px;
+  margin: 0;
+  padding: 1em; }
+
+/* line 52, ../../sass/style.scss */
+.right {
+  margin-left: 640px;
+  border-left: 1px dotted #999999; }
+
+/* line 57, ../../sass/style.scss */
+body {
+  background-color: #f2f2f2; }

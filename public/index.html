@@ -13,7 +13,7 @@
 
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
 
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
 </head>
@@ -22,7 +22,8 @@
 <h1>SwingTake</h1>
 <h2>Because the only figures you want are dancing ones&hellip;</h2>
 </header>
-<div role="main">
+<div id="main" role="main">
+<div class='left'>
 <section id='start'>
 	<label for='start_amount'>Starting Float $</label><input id='start_amount' name='start_amount' type='text'/>
 </section>
@@ -31,7 +32,7 @@
 		<thead>
 			<tr>
 				<th>Name? (Optional)</th>
-				<th colspan='3'>Classes/Social<br/><em>L1/L2/S</em></th>
+				<th colspan='4'>Classes/Social<br/><em>L1/L2/L3/S</em></th>
 				<th>Paid How</th>
 				<th>L/F?</th>
 			</tr>
@@ -41,6 +42,7 @@
 				<td><input type='text' name='name001'/></td>
 				<td><input type='checkbox' name='l1_001'/></td>
 				<td><input type='checkbox' name='l2_001'/></td>
+				<td><input type='checkbox' name='l3_001'/></td>
 				<td><input type='checkbox' name='soc_001'/></td>
 				<td><select name='paid_001'><option value='cash'>$</option><option value='prepaid'>Prepaid</option><option value='free'>Guest</option></select>
 				<td><select name='lf_001'><option value='l'>Lead</option><option value='f'>Follow</option></select></td>
@@ -48,7 +50,8 @@
 		</tbody>
 	</table>
 </section>
-<section id='running_sheet'>
+</div>
+<section id='running_sheet' class='right'>
 	<dl>
 		<dt>Starting Cash</dt><dd>$ <span id='start_amount_ph'>Placeholder</span></dd>
 		<dt>Cash Revenue</dt><dd>$ <span id='cash_revenue_ph'>Placeholder</span></dd>

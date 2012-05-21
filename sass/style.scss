@@ -1,19 +1,59 @@
 @import 'bourbon/bourbon';
 
 /*$blue: #050f66;*/
-$main: black;
+$main: #333;
 
 $main-lighter: lighten($main, 20%);
-$background: lighten($main, 65%);
+$background: lighten($main, 75%);
+$section: darken($background, 20%);
 
-dt, th {
+dt, th, label {
   color: $main;
   font-weight: bold;
+}
+
+header {
+	background-color: $main;
+	color: $background;
+	margin: 0;
+	padding: 0;
 }
 
 footer {
 	color: $main-lighter;
 }
 
+#main {
+	width: 90%;
+	margin: 10px;
+}
+
+
+section {
+	border: 1px dashed $main-lighter;
+	background: $section;
+	
+	dl {
+		margin-left: 20px;
+	}
+	
+	dd {
+		color: $main;
+	}
+}
+
+.left {
+	float: left;
+	width: 500px;
+	margin: 0;
+	padding: 1em;
+}
+
+.right {
+	margin-left: 640px;
+	border-left: 1px dotted lighten($main, 40%);
+}
+
 body {
+	background-color: $background;
 }
