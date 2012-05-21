@@ -16,3 +16,13 @@ http://glowing-beach-7327.heroku.com/
 If you run a swing venue, and are interested in using this at your venue, please get in touch :)
 
 Andy>
+
+
+Tech Specs
+==========
+
+* HTML5/CSS3
+* jQuery
+* SASS for styling
+* Servable using Rack/Sinatra (for Heroku purposes)
+* JS tested using Jasmine
