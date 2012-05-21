@@ -12,6 +12,8 @@ dt, th, label {
   font-weight: bold;
 }
 
+
+
 header {
 	background-color: $main;
 	color: $background;
@@ -24,6 +26,12 @@ footer {
 }
 
 #main {
+	
+	.keep-together {
+		display: inline-block;
+		width: 100%;
+	}
+	
 	width: 70%;
 	margin: 10px;
 	@include columns(2); 

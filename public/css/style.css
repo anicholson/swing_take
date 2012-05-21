@@ -4,18 +4,18 @@ dt, th, label {
   color: #333333;
   font-weight: bold; }
 
-/* line 15, ../../sass/style.scss */
+/* line 17, ../../sass/style.scss */
 header {
   background-color: #333333;
   color: #f2f2f2;
   margin: 0;
   padding: 0; }
 
-/* line 22, ../../sass/style.scss */
+/* line 24, ../../sass/style.scss */
 footer {
   color: #666666; }
 
-/* line 26, ../../sass/style.scss */
+/* line 28, ../../sass/style.scss */
 #main {
   width: 70%;
   margin: 10px;
@@ -31,37 +31,41 @@ footer {
   -webkit-column-rule: 1px dotted #666666;
   -moz-column-rule: 1px dotted #666666;
   column-rule: 1px dotted #666666; }
+  /* line 30, ../../sass/style.scss */
+  #main .keep-together {
+    display: inline-block;
+    width: 100%; }
 
-/* line 36, ../../sass/style.scss */
+/* line 44, ../../sass/style.scss */
 section {
   border: 1px dashed #666666;
   background: #bfbfbf;
   margin-bottom: 20px;
   padding: 10px; }
-  /* line 41, ../../sass/style.scss */
+  /* line 49, ../../sass/style.scss */
   section dl {
     margin-left: 20px; }
-  /* line 45, ../../sass/style.scss */
+  /* line 53, ../../sass/style.scss */
   section dd {
     color: #333333; }
 
-/* line 50, ../../sass/style.scss */
+/* line 58, ../../sass/style.scss */
 #attendance {
   -webkit-column-break-after: always;
   -moz-column-break-after: always; }
 
-/* line 55, ../../sass/style.scss */
+/* line 63, ../../sass/style.scss */
 .left {
   float: left;
   width: 500px;
   margin: 0;
   padding: 1em; }
 
-/* line 62, ../../sass/style.scss */
+/* line 70, ../../sass/style.scss */
 .right {
   margin-left: 640px;
   border-left: 1px dotted #999999; }
 
-/* line 67, ../../sass/style.scss */
+/* line 75, ../../sass/style.scss */
 body {
   background-color: #f2f2f2; }
