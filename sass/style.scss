@@ -40,6 +40,10 @@ footer {
 	@include column-rule(1px dotted $main-lighter);
 }
 
+section, header, footer {
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
 
 section {
 	border: 1px dashed $main-lighter;
