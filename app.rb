@@ -14,6 +14,6 @@ send_file 'spec/SpecRunner.html'
 end
 
 get '/' do
-redirect '/index.html'
+send_file 'public/index.html'
 end
 
