@@ -1,4 +1,7 @@
-function calculate_attendance(inputs) {
+var SwingModel = Backbone.Model.extend({
+
+
+calculate_attendance: function(inputs) {
 	if(!inputs) {
 		return 0;
 	} else if(!inputs.students){
@@ -12,9 +15,9 @@ function calculate_attendance(inputs) {
 			return 0;
 		}
 	}
-}
+},
 
-function calculate_cash_takings(inputs) {
+calculate_cash_takings: function(inputs) {
 	var class_costs = [6.0, 15.0, 22.0, 30.0];
 
 	var attendance = inputs.students;
@@ -32,9 +35,9 @@ function calculate_cash_takings(inputs) {
 	}).reduce(function(accum, val){
 		return accum + val;
 	});
-}
+},
 
-function calculate_prepaid_revenue(inputs) {
+calculate_prepaid_revenue: function(inputs) {
 	var class_costs = [0.0, 13.0, 19.0, 26.0];
 
 	var attendance = inputs.students;
@@ -49,11 +52,11 @@ function calculate_prepaid_revenue(inputs) {
 			return 0.0;
 		}
 	}).reduce(function(accum, val) {return accum + val;});
-}
+},
 
-function calculate_rent_payment(inputs) {
+calculate_rent_payment: function(inputs) {
 	var rent = inputs.rent;
-	var attendance = calculate_attendance(inputs);
+	var attendance = inputs.attendance;
 
 	//default to fixed rental strategy if not specified
   if (!rent.strategy) {
@@ -63,21 +66,21 @@ function calculate_rent_payment(inputs) {
 	} else {
 		return rent.amount;
 	}
-}
+},
 
-function calculate_door_payment(inputs) {
+calculate_door_payment: function(inputs) {
 	if(inputs.door_amount){
 		return inputs.door_amount;
 	} else {
 		return 0.0;
 	}
-}
+},
 
-function calculate_host_payment(net_revenue, pp_revenue) {
+calculate_host_payment: function(net_revenue, pp_revenue) {
 	return Math.floor((net_revenue / 2.0)) - pp_revenue;
-}
+},
 
-function calculate_teacher_payment(inputs, start) {
+calculate_teacher_payment: function(inputs, start) {
 	var teacher_info = inputs.teachers;
 
   //assume 50-50 if not spelt out
@@ -111,28 +114,31 @@ function calculate_teacher_payment(inputs, start) {
 		}];
 	}
 }
+});
 
-function money_model(input_data) {
-	
-	var cash_revenue = calculate_cash_takings(input_data),
-	    pp_revenue   = calculate_prepaid_revenue(input_data),
-	    gross_revenue= cash_revenue + pp_revenue;
+SwingModel = SwingModel.extend({
+	money_model: function(input_data) {
 
-	var rent         = calculate_rent_payment(input_data),
-	    door         = calculate_door_payment(input_data),
-	    net_revenue  = gross_revenue - (rent + door);
+		var cash_revenue = this.calculate_cash_takings(input_data),
+		    pp_revenue   = this.calculate_prepaid_revenue(input_data),
+		    gross_revenue= cash_revenue + pp_revenue;
 
-	var host_payment = calculate_host_payment(net_revenue, pp_revenue);
-	var teachers_pay = calculate_teacher_payment(input_data, (net_revenue - host_payment - pp_revenue));
+		var rent         = this.calculate_rent_payment(input_data),
+		    door         = this.calculate_door_payment(input_data),
+		    net_revenue  = gross_revenue - (rent + door);
 
-	return {
-		cash_takings: cash_revenue,
-		prepaid_takings: pp_revenue,
-		net_revenue: net_revenue,
-		attendance: calculate_attendance(input_data),
-		rent: rent,
-		door: door,
-		host: host_payment,
-		teachers: teachers_pay
-	};
-}
+		var host_payment = this.calculate_host_payment(net_revenue, pp_revenue);
+		var teachers_pay = this.calculate_teacher_payment(input_data, (net_revenue - host_payment - pp_revenue));
+
+		return {
+			cash_takings: cash_revenue,
+			prepaid_takings: pp_revenue,
+			net_revenue: net_revenue,
+			attendance: input_data.attendance,
+			rent: rent,
+			door: door,
+			host: host_payment,
+			teachers: teachers_pay
+		};
+	}
+})

@@ -1,4 +1,7 @@
 describe('swing model', function(){
+	
+	var model = new SwingModel;
+	
 	var set1 = {
 		teachers : {
 			teacher_1: 'Jack',
@@ -19,7 +22,9 @@ describe('swing model', function(){
 			 {classes_taken: 1, payment_method: 'cash'},
 			 {classes_taken: 1, payment_method: 'cash'}
 		],
-		
+
+		attendance: 11,
+
 		rent : {
 			amount : 23.00,
 			strategy: 'fixed'
@@ -46,6 +51,8 @@ describe('swing model', function(){
 			 {classes_taken: 1, payment_method: 'cash'}
 		],
 
+		attendance: 10,
+
 		door_amount: 10.0,
 
 		rent : {
@@ -55,7 +62,8 @@ describe('swing model', function(){
 	};
 
 	it('should return a correct set of results for input set 1', function() {
-		var m1 = money_model(set1);
+		console.log(model);
+		var m1 = model.money_model(set1);
 		expect(m1.cash_takings).toBe(150.00);
 		expect(m1.prepaid_takings).toBe(13.00);
 		expect(m1.net_revenue).toBe(140.00);
@@ -68,7 +76,7 @@ describe('swing model', function(){
 	});
 
 	it('should return a correct set of results for input set 2', function() {
-		var m2 = money_model(set2);
+		var m2 = model.money_model(set2);
 		expect(m2.cash_takings).toBe(178.00);
 		expect(m2.prepaid_takings).toBe(19.00);
 		expect(m2.net_revenue).toBe(157.00);

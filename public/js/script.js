@@ -2,6 +2,9 @@
 
 */
 
+
+
+
 function update_money_state(attendance_info) {
 	var cash_float       = $('#start_amount_ph'),
 	    cash_revenue     = $('#cash_revenue_ph'),
