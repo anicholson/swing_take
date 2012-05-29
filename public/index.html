@@ -103,15 +103,17 @@
 
 <!-- start template section -->
 <script type='text/template' id='attendee_template'>
+
 	<td>
-		<input type='text' class='name' name='name_<%=cid%>'>
+		<input type='text' class='name attribute' id='name_<%=cid%>' name='name_<%=cid%>' value='<%=name%>'>
 	</td>
 	<td align='center'>
-		<input type='checkbox' name='l1_<%=cid%>'> <input type='checkbox' name='l2_<%=cid%>'> <input type='checkbox' name='l3_<%=cid%>'> <input type='checkbox' name='soc_<%=cid%>'>
+		<input type='checkbox' name='l1_<%=cid%>' id='l1_<%=cid%>' class='attribute'> <input type='checkbox' name='l2_<%=cid%>' id='l2_<%=cid%>' class='attribute'>
+		<input type='checkbox' name='l3_<%=cid%>' id='l3_<%=cid%>' class='attribute'> <input type='checkbox' name='soc_<%=cid%>' id='soc_<%=cid%>' class='attribute'>
 	</td>
 	<td>
-		<select name='paid_<%=cid%>'>
-			<option value='cash'>
+		<select name='paid_<%=cid%>' id='paid_<%=cid%>' class='attribute'>
+		  <option value='cash'>
 				$
 			</option>
 			<option value='prepaid'>
@@ -123,8 +125,8 @@
 		</select>
 	</td>
 	<td>
-		<select name='lf_<%=cid%>'>
-			<option value='l'>
+		<select name='lf_<%=cid%>' id='lf_<%=cid%>' class='attribute'>
+			<option value='l' <%if(role) == 'l' { }>
 				Lead
 			</option>
 			<option value='f'>
@@ -133,7 +135,7 @@
 		</select>
 	</td>
 	<td>
-		<img src='img/delete.png' />
+		<img src='img/delete.png' id='delete_<%=cid%>' class='delete'/>
 	</td>
 </script>
 </body>
