@@ -20,6 +20,7 @@
 	
 	<script type="text/javascript" src='js/libs/underscore.js'></script>
 	<script type="text/javascript" src='js/libs/backbone.js'></script>
+	<script type='text/javascript' src='js/libs/backbone-localstorage.js'></script>
 	<script type="text/javascript" src="http://use.typekit.com/bxw4osv.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
@@ -57,18 +58,10 @@
 				<th colspan='4'>Classes/Social<br/><em>L1/L2/L3/S</em></th>
 				<th>Paid How</th>
 				<th>L/F?</th>
+				<th><!--Delete placeholder column--></th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td><input type='text' name='name001'/></td>
-				<td colspan='4' align='center'><input type='checkbox' name='l1_001'/>
-				<input type='checkbox' name='l2_001'/>
-				<input type='checkbox' name='l3_001'/>
-				<input type='checkbox' name='soc_001'/></td>
-				<td><select name='paid_001'><option value='cash'>$</option><option value='prepaid'>Prepaid</option><option value='free'>Guest</option></select>
-				<td><select name='lf_001'><option value='l'>Lead</option><option value='f'>Follow</option></select></td>
-			</tr>
+		<tbody id="attendance_records">
 		</tbody>
 	</table>
 </section>
@@ -105,7 +98,41 @@
 <script src="js/plugins.js"></script>
 <script src='js/libs/swing_model.js'></script>
 <script src="js/script.js"></script>
+<script src="js/libs/attendee.js"></script>
 <!-- end scripts-->
 
+<!-- start template section -->
+<script type='text/template' id='attendee_template'>
+	<td>
+		<input type='text' name='name_<%=cid%>'>
+	</td>
+	<td colspan='4' align='center'>
+		<input type='checkbox' name='l1_<%=cid%>'> <input type='checkbox' name='l2_<%=cid%>'> <input type='checkbox' name='l3_<%=cid%>'> <input type='checkbox' name='soc_<%=cid%>'>
+	</td>
+	<td>
+		<select name='paid_<%=cid%>'>
+			<option value='cash'>
+				$
+			</option>
+			<option value='prepaid'>
+				Prepaid
+			</option>
+			<option value='free'>
+				Guest
+			</option>
+		</select>
+	</td>
+	<td>
+		<select name='lf_<%=cid%>'>
+			<option value='l'>
+				Lead
+			</option>
+			<option value='f'>
+				Follow
+			</option>
+		</select>
+	</td>
+	
+</script>
 </body>
 </html>
