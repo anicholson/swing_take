@@ -62,6 +62,9 @@ section {
 #attendance {
 	-webkit-column-break-after: always;
 	-moz-column-break-after: always;
+	table {
+		width: 100%;
+	}
 }
 
 .left {
