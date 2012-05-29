@@ -66,7 +66,7 @@ var AttendeeView = Backbone.View.extend({
 	initialize: function() {
 		this.model.bind('create', this.render, this);
 		this.model.bind('change', this.updateView, this);
-		this.model.bind('destroy', this.remove, this);
+		this.model.bind('destroy', this.close, this);
 		this.attributes.parentCollection.bind('remove', this.personRemoved, this);
 	},
 	
@@ -74,6 +74,10 @@ var AttendeeView = Backbone.View.extend({
 		console.log("Someone tried to delete a person. Is it", this.model, "?");
 		if(person === this.model){
 			person.destroy();
+		}
+		
+		if(this.attributes.parentCollection.length == 0) {
+			this.attributes.parentCollection.add(new Attendee());
 		}
 	},
 	
@@ -84,6 +88,13 @@ var AttendeeView = Backbone.View.extend({
 	
 	clear : function(){
 		this.attributes.parentCollection.remove(this.model);
+	},
+	
+	onClose : function() {
+		this.model.unbind('create', this.render);
+		this.model.unbind('change', this.updateView);
+		this.model.unbind('destroy', this.close);
+		this.attributes.parentCollection.unbind('remove', this.personRemoved, this);
 	},
 	
 	updateModel: function() {
