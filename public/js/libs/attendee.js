@@ -49,7 +49,37 @@ var ClassList = Backbone.Collection.extend({
 	}
 });
 
-var SwingEvent = new ClassList;
+var SwingEvent = Backbone.View.extend({
+	template: _.template($('#running_sheet_template').html()),
+	el: '#running_sheet',
+	
+	defaults: function(){
+
+	},
+	
+	initialize: function(options) {
+		this.class_list = options.class_list;
+		this.rule_set = options.rule_set;
+		
+		this.class_list.bind('change', this.render);
+		this.render();
+	},
+	
+	numberCrunch : function(classes) {
+		return classes.student_data();
+		//return this.rule_set.money_model(classes);
+	},
+	
+	render: function() {
+		var new_results = this.numberCrunch(this.class_list);
+
+		console.log(new_results);
+		this.$el.html(this.template(new_results));
+
+	}
+	
+	
+});
 
 var AttendeeView = Backbone.View.extend({
 
@@ -125,6 +155,10 @@ var AttendeeView = Backbone.View.extend({
 	}
 });
 
+var SwingClassList = new ClassList;
+var RunningSheet   = new SwingEvent({class_list: SwingClassList, rule_set: new SwingModel});
+
+
 var AppView = Backbone.View.extend({
 	
 	el: $("#attendance_records"),
@@ -133,7 +167,8 @@ var AppView = Backbone.View.extend({
 		
 	},
 	
-	students: SwingEvent,
+	students: SwingClassList,
+	running_sheet: RunningSheet,
 	
 	initialize: function() {
 		this.students.bind('add', this.addOne, this);
@@ -158,10 +193,10 @@ var AppView = Backbone.View.extend({
 
 var App = new AppView;
 
-SwingEvent.fetch();
+SwingClassList.fetch();
 
-if(SwingEvent.length == 0) {
-	SwingEvent.add(new Attendee());
+if(SwingClassList.length == 0) {
+	SwingClassList.add(new Attendee());
 }
 
 });
