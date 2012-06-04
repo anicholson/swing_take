@@ -19,7 +19,7 @@ function update_money_state(attendance_info) {
 
 $(document).ready(function(){
 	//When the input values change, cascade the changes through
-	$('#start_amount').on('keyup', function(event){
+	$('#start_amount').on('input', function(event){
 		$('#start_amount_ph').html($(this).val());
 	});
 
