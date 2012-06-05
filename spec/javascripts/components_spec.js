@@ -100,6 +100,10 @@ describe('rental payments', function(){
 	});
 
   describe('pro-rata rental', function() {
+		it('should not be paid with no students', function(){
+			expect(model.calculate_rent_payment({rent: {amount: 3.00, strategy: 'prorata'}, students: []})).toBe(0.0);
+		});
+	
 		it('should be the rate multiplied by the number of paying students', function() {
 			expect(model.calculate_rent_payment(cadet)).toBe(9.00);
 		});
@@ -112,11 +116,14 @@ describe('door payment', function() {
 	});
 	
 	it('should not be made with no students', function() {
-		expect(model.calculate_door_payment({})).toBe(0.00);
+		expect(model.calculate_door_payment({students: []})).toBe(0.00);
 	});
 })
 
 describe("swing patrol's take", function() {
+	it("should be $0 with no students", function(){
+		expect(model.calculate_host_payment(0,0)).toBe(0.0);
+	});
 
 	it("should be 50% of net revenue", function(){
 		expect(model.calculate_host_payment(100, 0)).toBe(50.0);
@@ -128,6 +135,11 @@ describe("swing patrol's take", function() {
 });
 
 describe("teachers' take", function() {
+	
+	it('should be $0 with no students', function(){
+		teachers = model.calculate_teacher_payment({students: []}, 0);
+		expect(teachers[0].pay + teachers[1].pay).toEqual(0.0);
+	});
 
 	it("should equal 50% of net revenue", function(){
 		var net_revenue = 100.00;
