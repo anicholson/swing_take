@@ -34,7 +34,7 @@ calculate_cash_takings: function(inputs) {
 		}
 	}).reduce(function(accum, val){
 		return accum + val;
-	});
+	}, 0.0);
 },
 
 calculate_prepaid_revenue: function(inputs) {
@@ -51,7 +51,7 @@ calculate_prepaid_revenue: function(inputs) {
 		} else {
 			return 0.0;
 		}
-	}).reduce(function(accum, val) {return accum + val;});
+	}).reduce(function(accum, val) {return accum + val;}, 0.0);
 },
 
 calculate_rent_payment: function(inputs) {
@@ -62,7 +62,11 @@ calculate_rent_payment: function(inputs) {
   if (!rent.strategy) {
 		return rent.amount;
   } else if (rent.strategy == 'prorata') {
-		return (rent.amount * attendance);
+		if(!attendance) {
+			return 0.0;
+		} else {
+			return (rent.amount * attendance);
+		}
 	} else {
 		return rent.amount;
 	}

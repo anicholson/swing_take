@@ -12,7 +12,20 @@ var Attendee = Backbone.Model.extend({
 	
 	classes_attended: function() {
 		return this.get('classes').length;
-	}	
+	},
+	
+	attendance_data: function() {
+		return {
+			name: this.get('name'),
+			classes_taken: this.classes_attended(),
+			payment_method: this.get('paid')
+		};
+	},
+	
+	counts_for_rent: function(){
+		var p = this.get('paid');
+		return (p == 'cash' || p == 'prepaid');
+	}
 });
 
 //Functions for Attendee manipulation...
@@ -44,8 +57,28 @@ var ClassList = Backbone.Collection.extend({
 	
 	localStorage: new Store('swing_take_backbone'),
 	
+	retrieve_info: function(student) {
+		return student.attendance_data();
+	},
+	
 	student_data: function() {
-		return {};//TODO: return an object the model calculator can use
+		return {
+			
+			students: this.map(this.retrieve_info),
+			
+			attendance: this.filter(function(s) {return s.counts_for_rent() == true;}).length,
+			
+			teachers: {
+				teacher_1: "Teacher 1",
+				teacher_2: "Teacher 2",
+				strategy: 'normal'
+			},
+			
+			rent: {
+				amount : 3.00,
+				strategy: 'prorata'
+			}
+		};
 	}
 });
 
@@ -61,20 +94,22 @@ var SwingEvent = Backbone.View.extend({
 		this.class_list = options.class_list;
 		this.rule_set = options.rule_set;
 		
-		this.class_list.bind('change', this.render);
+		this.class_list.bind('change', this.render, this);
 		this.render();
 	},
 	
 	numberCrunch : function(classes) {
 		return classes.student_data();
-		//return this.rule_set.money_model(classes);
 	},
 	
 	render: function() {
 		var new_results = this.numberCrunch(this.class_list);
 
-		console.log(new_results);
-		this.$el.html(this.template(new_results));
+		console.log("student data", new_results);
+		var output = this.rule_set.money_model(new_results);
+		console.log("output data", output);
+		
+		this.$el.html(this.template(output));
 
 	}
 	

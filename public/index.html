@@ -132,18 +132,19 @@
 </script>
 <script type='text/template' id='running_sheet_template'>
 	<dl>	
-		<dt>Cash Revenue</dt><dd>$ <span id='cash_revenue_ph'>Placeholder</span></dd>
-		<dt>Prepaid Revenue</dt><dd>$ <span id='prepaid_revenue_ph'>Placeholder</span></dd>
+		<dt>Cash Revenue</dt><dd>$ <span id='cash_revenue_ph'><%=cash_takings%></span></dd>
+		<dt>Prepaid Revenue</dt><dd>$ <span id='prepaid_revenue_ph'><%=prepaid_takings%></span></dd>
 		<dt>Gross Revenue</dt><dd>$ <span id='gross_revenue_ph'>Placeholder</span></dd>
 	</dl>
 	<dl>
-		<dt>Rental Payment</dt><dd>$ <span id='rental_ph'>Placeholder</span></dd>
-		<dt>Door Payment</dt><dd>$ <span id='door_ph'>Placeholder</span></dd>
-		<dt>Net Revenue</dt><dd>$ <span id='net_revenue_ph'>Placeholder</span></dd>
+		<dt>Rental Payment</dt><dd>$ <span id='rental_ph'><%=rent%></span></dd>
+		<dt>Door Payment</dt><dd>$ <span id='door_ph'><%=door%></span></dd>
+		<dt>Net Revenue</dt><dd>$ <span id='net_revenue_ph'><%=net_revenue%></span></dd>
 	</dl>
 	<dl>
-		<dt>SP Cut</dt><dd>$ <span id='sp_ph'>Placeholder</span></dd>
-		<dt>Teachers&quot; Payment</dt><dd>$ <span id='teachers_ph'>Placeholder</span></dd>
+		<dt>SP Cut</dt><dd>$ <span id='sp_ph'><%=host%></span></dd>
+		<dt>Teacher 1 Payment</dt><dd>$ <span id='teacher1_ph'><%=teachers[0].pay%></span></dd>
+		<dt>Teacher 2 Payment</dt><dd>$ <span id='teacher2_ph'><%=teachers[1].pay%></span></dd>
 	</dl>
 </script>
 </body>
