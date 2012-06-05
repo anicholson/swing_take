@@ -7,6 +7,13 @@ $main-lighter: lighten($main, 20%);
 $background: lighten($main, 75%);
 $section: darken($background, 20%);
 
+body {
+	background-color: $background;
+	font: 100%/1.5;
+	margin: 0 auto;
+	padding: 1em 20%;
+}
+
 dt, th, label {
   color: $main;
   font-weight: bold;
@@ -19,6 +26,12 @@ header {
 	color: $background;
 	margin: 0;
 	padding: 0;
+	h1 {
+		$h1_size: 24;
+		font-size: ($h1_size / 16 * 1em);
+		line-height: (28 / $h1_size);
+		margin-top: (24 / $h1_size * 1em);
+	}
 }
 
 footer {
@@ -32,8 +45,10 @@ footer {
 		width: 100%;
 	}
 	
-	width: 70%;
-	margin: 10px;
+	padding-left: 5%;
+	padding-right: 5%;
+	/*width: 70%;
+	margin: (10/16 * 1em);*/
 	@include columns(2); 
 	@include column-fill(balanced);
 	@include column-gap(50px);
@@ -77,9 +92,4 @@ section {
 .right {
 	margin-left: 640px;
 	border-left: 1px dotted lighten($main, 40%);
-}
-
-body {
-	background-color: $background;
-
 }
