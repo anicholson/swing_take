@@ -15,6 +15,11 @@ get '/ci' do
 send_file 'spec/SpecRunner.html'
 end
 
+get '/js/libs/:file' do
+  cache_control :public, :must_revalidate, :max_age=>3600
+  send_file "js/libs/#{params[:file]}"
+end
+
 get '/' do
 cache_control :public, :must_revalidate, :max_age=>3600
 send_file 'public/index.html'
