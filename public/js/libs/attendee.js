@@ -11,7 +11,7 @@ var Attendee = Backbone.Model.extend({
 	},
 	
 	classes_attended: function() {
-		return this.get('classes').length;
+		return _.reduce(this.get('classes'), function(memo, c){ return (c ? memo + 1 : memo); }, 0);
 	},
 	
 	attendance_data: function() {
@@ -24,6 +24,9 @@ var Attendee = Backbone.Model.extend({
 	
 	counts_for_rent: function(){
 		var p = this.get('paid');
+		if(this.classes_attended() == 0) {
+			return false;
+		}
 		return (p == 'cash' || p == 'prepaid');
 	}
 });
@@ -58,7 +61,8 @@ var ClassList = Backbone.Collection.extend({
 	localStorage: new Store('swing_take_backbone'),
 	
 	retrieve_info: function(student) {
-		return student.attendance_data();
+		var x = student.attendance_data();
+		return x;
 	},
 	
 	student_data: function() {
@@ -125,7 +129,7 @@ var AttendeeView = Backbone.View.extend({
 	events: {
 		'click .delete'  : "clear",
 		'keypress .name' : 'newOnEnter',
-		'blur .attribute': 'updateModel'
+		'change .attribute': 'updateModel'
 	},
 	
 	initialize: function() {
@@ -166,10 +170,17 @@ var AttendeeView = Backbone.View.extend({
 		var c = this.model.cid,
 		    m = this.model;
 
+		var classes = $.map(['#l1', '#l2', '#l3', '#soc'], function(i) {
+			return $(i + '_' + c).prop('checked');
+		});
+		
+		console.log(classes);
+
 		m.save({
 			name: $('#name_' + c).val(),
 			paid: $('#paid_' + c).val(),
-			role: $('#lf_' + c).val()
+			role: $('#lf_' + c).val(),
+			classes: classes
 		});
 	},
 	

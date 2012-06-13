@@ -100,8 +100,8 @@
 		<input type='text' class='name attribute' id='name_<%=cid%>' name='name_<%=cid%>' value='<%=name%>'>
 	</td>
 	<td align='center'>
-		<input type='checkbox' name='l1_<%=cid%>' id='l1_<%=cid%>' class='attribute'> <input type='checkbox' name='l2_<%=cid%>' id='l2_<%=cid%>' class='attribute'>
-		<input type='checkbox' name='l3_<%=cid%>' id='l3_<%=cid%>' class='attribute'> <input type='checkbox' name='soc_<%=cid%>' id='soc_<%=cid%>' class='attribute'>
+		<input type='checkbox' name='l1_<%=cid%>' id='l1_<%=cid%>' class='attribute' <% if(classes[0]) print('checked="checked"'); %>> <input type='checkbox' name='l2_<%=cid%>' id='l2_<%=cid%>' class='attribute' <% if(classes[1]) print('checked="checked"'); %>>
+		<input type='checkbox' name='l3_<%=cid%>' id='l3_<%=cid%>' class='attribute' <% if(classes[2]) print('checked="checked"'); %>> <input type='checkbox' name='soc_<%=cid%>' id='soc_<%=cid%>' class='attribute' <% if(classes[3]) print('checked="checked"'); %>>
 	</td>
 	<td>
 		<select name='paid_<%=cid%>' id='paid_<%=cid%>' class='attribute'>
