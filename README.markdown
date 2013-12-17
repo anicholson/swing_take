@@ -28,3 +28,6 @@ Tech Specs
 * Servable using Rack/Sinatra (for Heroku purposes)
 * JS tested using Jasmine
 * client-side handled using Backbone.js
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/anicholson/swing_take/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
